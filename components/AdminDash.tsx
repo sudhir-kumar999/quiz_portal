@@ -137,6 +137,7 @@ export default function AdminDash() {
             onSuccess={() => {
               setReInvite(false);
             }}
+            onClose={() => setReInvite(false)}
           />
         </div>
       )}
