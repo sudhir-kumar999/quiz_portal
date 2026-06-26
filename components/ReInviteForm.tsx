@@ -98,9 +98,7 @@ export default function ReInviteForm({
 </IconButton>
         <Typography
           variant="h5"
-          fontWeight={700}
-          textAlign="center"
-          mb={3}
+          sx={{fontWeight:700,textAlign:"center",mb:3}}
         >
           Re-Invite Manager
         </Typography>
