@@ -1,5 +1,5 @@
 @import "tailwindcss";
-
+/* 
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -23,4 +23,25 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+} */
+
+@layer base {
+  h1 {
+    @apply text-4xl font-bold mb-4;
+  }
+  h2 {
+    @apply text-2xl font-semibold mb-3;
+  }
+}
+
+@theme {
+  --breakpoint-xs: 17rem; /* 480px */
+}
+
+body{
+  @apply min-h-screen
+}
+html,body {
+  height: 100%;
+  background: linear-gradient(135deg #60a5fa #818cf8 #a78bfa);
 }
