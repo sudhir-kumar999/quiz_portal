@@ -83,6 +83,7 @@ export default function AllResult() {
         My Results
       </Typography>
       {message && <Typography color="error">{message}</Typography>}
+      {results?.length==0 && <Typography color="error">No result found</Typography>}
       <Grid container spacing={3}>
         {results.map((result) => (
           <Grid

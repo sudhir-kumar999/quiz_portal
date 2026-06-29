@@ -7,7 +7,7 @@ import { BiSolidHide, BiShow } from "react-icons/bi";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { AuthContext } from "@/context/AuthContext";
-
+import {motion} from "framer-motion"
 export default function LoginQuiz() {
   const router = useRouter();
   const { getMe } = useContext(AuthContext)!;
@@ -74,10 +74,12 @@ export default function LoginQuiz() {
 
   return (
     <div className="flex justify-center flex-col items-center min-h-screen bg-gradient-to-br from-[#EBF2FF] to-[#f3d69b]">
+            <motion.div initial={{y:-500,opacity:0}} animate={{y:0,opacity:1}} transition={{duration:0.5 , delay:0.1,ease:"easeIn"}}>
       <Image src={student} height={100} width={100} alt="logo" />
       <h1 className="text-3xl font-bold mb-4">Quiz Portal</h1>
-      <div className="max-w-[550px] rounded-xl w-[90vw] shadow-xl flex flex-col p-8 bg-white">
-        <div className="flex flex-col">
+   </motion.div>
+      <motion.div initial={{y:500,opacity:0}} animate={{y:0,opacity:1}} transition={{duration:0.5 , delay:0.1,ease:"easeIn"}} className="max-w-[550px] rounded-xl w-[90vw] shadow-xl flex flex-col p-8 bg-white">
+        <div  className="flex flex-col">
           <p className="mb-3 text-gray-600 font-semibold">Login as</p>
           <div className="flex gap-3 justify-center flex-wrap mb-5">
             <button
@@ -175,7 +177,7 @@ export default function LoginQuiz() {
             </button>
           </form>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 }

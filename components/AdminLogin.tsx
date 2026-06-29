@@ -8,7 +8,7 @@ import { BiShow } from "react-icons/bi";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { AuthContext } from "@/context/AuthContext";
-
+import {motion} from "framer-motion"
 export default function AdminLogin() {
   const router = useRouter();
   const auth = useContext(AuthContext);
@@ -52,9 +52,11 @@ export default function AdminLogin() {
   const [showPassword, setShowPassword] = useState(false);
   return (
     <div className="flex justify-center flex-col items-center  min-h-screen  bg-gradient-to-br from-[#EBF2FF] to-[#f3d69b] ">
+      <motion.div initial={{y:-500,opacity:0}} animate={{y:0,opacity:1}} transition={{duration:0.5 , delay:0.1,ease:"easeIn"}}>
       <Image src={student} height={100} width={100} alt="logo" />
       <h1>Quiz Portal</h1>
-      <div className=" max-w-[550px] rounded-xl w-[90vw]   max-h-full shadow-xl/30 flex flex-col p-8">
+      </motion.div>
+      <motion.div initial={{y:500,opacity:0}} animate={{y:0,opacity:1}} transition={{duration:0.5 , delay:0.1,ease:"easeIn"}} className=" max-w-[550px] rounded-xl w-[90vw]   max-h-full shadow-xl/30 flex flex-col p-8">
         <div className=" p-2 flex flex-col flex-wrap ">
           <p className="m-2 text-gray-600">Login as</p>
           <div className={`flex justify-around  flex-wrap `}>
@@ -109,7 +111,7 @@ export default function AdminLogin() {
             </button>
           </form>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 }

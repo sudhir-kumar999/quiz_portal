@@ -5,7 +5,7 @@ import { FaUser } from "react-icons/fa";
 import { useContext, useEffect } from "react";
 import { AuthContext } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
-
+import {motion} from "framer-motion"
 export default function Home() {
   const auth = useContext(AuthContext);
   const router = useRouter();
@@ -44,7 +44,7 @@ export default function Home() {
       <div className="absolute -top-40 -left-40 h-96 w-96 rounded-full bg-cyan-500/20 blur-[150px]" />
       <div className="absolute bottom-0 right-0 h-96 w-96 rounded-full bg-purple-500/20 blur-[150px]" />
       <div className="relative z-10 mx-auto flex min-h-screen max-w-7xl flex-col justify-center px-6 py-24">
-        <div className="text-center">
+        <motion.div initial={{y:-500,opacity:0}} animate={{y:0,opacity:1}} transition={{duration:0.5 , delay:0.1,ease:"easeIn"}} className="text-center">
           <span className="rounded-full border border-cyan-400/20 bg-cyan-500/10 px-5 py-2 text-sm font-medium text-cyan-300">
             Organization based Quiz Portal
           </span>
@@ -58,8 +58,8 @@ export default function Home() {
           <p className="mx-auto mt-6 max-w-3xl text-lg leading-8 text-gray-300">
             Invite teachers through email then ban and unban users create and manage quiz or test show result after a specific date
           </p>
-        </div>
-          <div className="group rounded-3xl mb-4 border border-white/10 bg-white/5 backdrop-blur-xl p-8 transition-all duration-300 hover:-translate-y-2 hover:bg-white/10 hover:shadow-2xl">
+        </motion.div>
+          <motion.div initial={{x:-500,opacity:0}} animate={{x:0,opacity:1}} transition={{duration:0.2 , delay:0.1,ease:"easeIn"}} className="group rounded-3xl mt-2 mb-4 border border-white/10 bg-white/5 backdrop-blur-xl p-8 transition-all duration-300 hover:-translate-y-2 hover:bg-white/10 hover:shadow-2xl">
               <MdAdminPanelSettings className="text-6xl text-white" />
             <h2 className="mt-6 text-3xl font-bold text-white">
               Super Admin
@@ -73,8 +73,8 @@ export default function Home() {
             >
               Login as Super Admin
             </Link>
-          </div>
-          <div className="group mt-2 rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl p-8 transition-all duration-300 hover:-translate-y-2 hover:bg-white/10 hover:shadow-2xl">
+          </motion.div>
+          <motion.div initial={{x:500,opacity:0}} animate={{x:0,opacity:1}} transition={{duration:0.2 , delay:0.1,ease:"easeIn"}} className="group mt-2 rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl p-8 transition-all duration-300 hover:-translate-y-2 hover:bg-white/10 hover:shadow-2xl">
               <FaUser className="text-4xl text-white" />
             <h2 className="mt-6 text-3xl font-bold text-white">
               Manager / Teacher / Student
@@ -90,7 +90,7 @@ export default function Home() {
             >
               Login
             </Link>
-          </div>
+          </motion.div>
         </div>
       </div>
   );

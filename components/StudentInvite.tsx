@@ -73,11 +73,11 @@ export default function StudentInvite() {
             {error}
           </div>
         )}
-        {success && (
+        {/* {success && (
           <div className="mb-4 rounded-lg border border-green-300 bg-green-100 text-green-600 p-3">
             {success}
           </div>
-        )}
+        )} */}
         {successEmails.length > 0 && (
           <div className="mb-4 rounded-lg border border-green-300 bg-green-50 p-4">
             <h3 className="font-semibold text-green-700 mb-2">

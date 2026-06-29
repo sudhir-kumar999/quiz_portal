@@ -162,10 +162,9 @@ export default function ManagerDashboard({
             sx={{
               fontWeight: 700,
               mr: 4,
-              display: { xs: "none", md: "block" },
             }}
           >
-            My Dashboard
+            Manager Panel
           </Typography>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
@@ -243,6 +242,7 @@ export default function ManagerDashboard({
                 <Typography variant="h6" sx={{ fontWeight: 700 }}>
                   {user?.organization.title}
                 </Typography>
+                <Typography>My Email: {user?.email}</Typography>
               </CardContent>
             </Card>
           </Grid>

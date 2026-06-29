@@ -56,6 +56,12 @@ export default function CreateQuiz() {
         success: data.success,
         message: data.message,
       });
+      setTitle("")
+      setDescription("")
+      setStartDate("")
+      setEndDate("")
+      setDuration(0)
+      setQuestions([])
     } catch (error: any) {
       setResponse({
         success: false,

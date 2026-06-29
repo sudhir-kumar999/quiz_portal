@@ -12,9 +12,11 @@ export default function OrgForm({ onSuccess }: Props) {
     email:""
   })
   const [error, setError] = useState("");
+  const [loading,setLoading]=useState(false)
 
   async function handleForm(e: React.FormEvent<HTMLFormElement>){
     try {
+      setLoading(true)
       e.preventDefault()
         setError("");
     console.log(formData)
@@ -27,6 +29,7 @@ export default function OrgForm({ onSuccess }: Props) {
     if(res.data.success){
       setError("");
       onSuccess()
+      setLoading(false)
     return { success: true, 
         error: res.data.message,
         data:res.data.data
@@ -42,7 +45,6 @@ export default function OrgForm({ onSuccess }: Props) {
     }
   }
   }
-
   return (
     <div className="mt-10 flex  justify-center items-center h-screen">
       <div className="m-2 xs:m-4 ">
@@ -93,9 +95,10 @@ export default function OrgForm({ onSuccess }: Props) {
               />
               <button
                 type="submit"
+                disabled={loading}
                 className="mt-4 mb-2 bg-amber-400 w-full rounded-full  font-medium rounded-base text-sm px-4 py-2.5 text-center leading-5"
               >
-                Create
+                {loading ?"Creating...":"Create"}
               </button>
             </div>
           </form>
