@@ -13,12 +13,10 @@ export default function OrgForm({ onSuccess }: Props) {
   })
   const [error, setError] = useState("");
 
-
   async function handleForm(e: React.FormEvent<HTMLFormElement>){
     try {
       e.preventDefault()
         setError("");
-
     console.log(formData)
     const res=await axios.post("/api/admin/create-org",formData,{
         headers: {
@@ -57,43 +55,40 @@ export default function OrgForm({ onSuccess }: Props) {
 )}
           <form action="" onSubmit={(e)=>handleForm(e)} className="flex flex-col gap-2">
             <div className="flex flex-col  gap-4">
-              <label htmlFor="mail">Title of Organization</label>
+              <label htmlFor="title">Title of Organization</label>
               <input
                 type="text"
-                id="mail"
+                id="title"
                 value={formData.title}
                 onChange={((e)=>setFormData({...formData,title:e.target.value}))}
-                placeholder="Enter your Email"
+                placeholder="Enter Title of organization"
                 className="w-full px-3 py-3 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:outline-none sm:text-base md:px-4 md:py-3"
               />
-              <label htmlFor="mail">Max Teachers allowed</label>
+              <label htmlFor="teacher">Max Teachers allowed</label>
               <input
                 type="text"
-                id="pass"
+                id="teacher"
                 onChange={((e)=>setFormData({...formData,max_teacher:e.target.value}))}
-
                 value={formData.max_teacher}
-                placeholder="Enter your Password"
+                placeholder="Enter Max allowed teacher"
                 className="w-full px-3 py-3 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:outline-none sm:text-base md:px-4 md:py-3"
               />
-              <label htmlFor="mail">Max Students allowed</label>
+              <label htmlFor="student">Max Students allowed</label>
               <input
                 type="text"
-                id="pass"
+                id="student"
                 onChange={((e)=>setFormData({...formData,max_student:e.target.value}))}
-
+                placeholder="Enter Max allowed student"
                 value={formData.max_student}
-                placeholder="Enter your Password"
                 className="w-full px-3 py-3 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:outline-none sm:text-base md:px-4 md:py-3"
               />
               <label htmlFor="mail">Manager&apos;s Email</label>
               <input
                 type="text"
-                id="pass"
+                id="mail"
                 onChange={((e)=>setFormData({...formData,email:e.target.value}))}
-
                 value={formData.email}
-                placeholder="Enter your Password"
+                placeholder="Enter manager's email"
                 className="w-full px-3 py-3 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:outline-none sm:text-base md:px-4 md:py-3"
               />
               <button
@@ -102,7 +97,6 @@ export default function OrgForm({ onSuccess }: Props) {
               >
                 Create
               </button>
-              {/* <p>Not yet accept invitations ?</p> */}
             </div>
           </form>
         </div>

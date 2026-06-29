@@ -7,10 +7,7 @@ import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import DashboardIcon from "@mui/icons-material/Dashboard";
 import PeopleIcon from "@mui/icons-material/People";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import SettingsIcon from "@mui/icons-material/Settings";
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -50,8 +47,6 @@ type User = {
   isDefPassUsed: boolean;
 };
 
-
-
 export default function ManagerDashboard({
   children,
 }: {
@@ -68,7 +63,6 @@ export default function ManagerDashboard({
   async function getUserData() {
     try {
       setPageLoading(true);
-
       const res = await axios.get("/api/manager/getuser");
       setUserList(res.data.data);
     } catch (error) {
@@ -83,7 +77,6 @@ export default function ManagerDashboard({
   }, []);
   const handleToggle = async (id: string) => {
     setEditId(id);
-
     try {
       await axios.post(
         "/api/manager/banusers",
@@ -95,7 +88,6 @@ export default function ManagerDashboard({
           withCredentials: true,
         },
       );
-
       setUserList((prev) =>
         prev.map((user) =>
           user.id === id ? { ...user, isBanned: !user.isBanned } : user,
@@ -145,9 +137,7 @@ export default function ManagerDashboard({
           withCredentials: true,
         },
       );
-
       setUser(null);
-
       router.replace("/");
       router.refresh();
     } catch (error) {
@@ -177,21 +167,17 @@ export default function ManagerDashboard({
           >
             My Dashboard
           </Typography>
-
           <Box sx={{ flexGrow: 1 }} />
-
           <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
             <Tooltip title="Logout">
               <IconButton color="inherit" onClick={handleLogout}>
                 <LogoutIcon />
               </IconButton>
             </Tooltip>
-
             <Avatar>{user?.name?.charAt(0).toUpperCase()}</Avatar>
           </Box>
         </Toolbar>
       </AppBar>
-
       <Box
         component="main"
         sx={{
@@ -203,46 +189,43 @@ export default function ManagerDashboard({
         }}
       >
         <Toolbar />
-
-<Box
-  sx={{
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    flexWrap: "wrap",
-    mb: 3,
-  }}
->
-  <Typography variant="h4" sx={{ fontWeight: 700 }}>
-    Manager Dashboard
-  </Typography>
-
-  <Box sx={{ display: "flex", gap: 2 }}>
-    <Button
-      variant="contained"
-      color="success"
-      onClick={() => setInviteTeacher(true)}
-      sx={{
-        borderRadius: 2,
-        textTransform: "none",
-      }}
-    >
-      Invite Teacher
-    </Button>
-
-    <Button
-      variant="contained"
-      color="primary"
-      onClick={() => setReInvite(true)}
-      sx={{
-        borderRadius: 2,
-        textTransform: "none",
-      }}
-    >
-      Re-Invite
-    </Button>
-  </Box>
-</Box>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            flexWrap: "wrap",
+            mb: 3,
+          }}
+        >
+          <Typography variant="h4" sx={{ fontWeight: 700 }}>
+            Manager Dashboard
+          </Typography>
+          <Box sx={{ display: "flex", gap: 2 }}>
+            <Button
+              variant="contained"
+              color="success"
+              onClick={() => setInviteTeacher(true)}
+              sx={{
+                borderRadius: 2,
+                textTransform: "none",
+              }}
+            >
+              Invite Teacher
+            </Button>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={() => setReInvite(true)}
+              sx={{
+                borderRadius: 2,
+                textTransform: "none",
+              }}
+            >
+              Re-Invite
+            </Button>
+          </Box>
+        </Box>
         <Grid container spacing={3}>
           <Grid size={{ xs: 12, md: 4 }}>
             <Card
@@ -254,43 +237,35 @@ export default function ManagerDashboard({
             >
               <CardContent>
                 <BusinessIcon color="primary" sx={{ fontSize: 40 }} />
-
                 <Typography color="text.secondary" sx={{ mt: 2 }}>
                   Organization
                 </Typography>
-
                 <Typography variant="h6" sx={{ fontWeight: 700 }}>
                   {user?.organization.title}
                 </Typography>
               </CardContent>
             </Card>
           </Grid>
-
           <Grid size={{ xs: 12, md: 4 }}>
             <Card elevation={2}>
               <CardContent>
                 <PeopleIcon color="success" sx={{ fontSize: 40 }} />
-
                 <Typography color="text.secondary" sx={{ mt: 2 }}>
                   Teachers
                 </Typography>
-
                 <Typography variant="h4" sx={{ fontWeight: 700 }}>
                   {user?.organization.max_teacher}
                 </Typography>
               </CardContent>
             </Card>
           </Grid>
-
           <Grid size={{ xs: 12, md: 4 }}>
             <Card elevation={2}>
               <CardContent>
                 <SchoolIcon color="warning" sx={{ fontSize: 40 }} />
-
                 <Typography color="text.secondary" sx={{ mt: 2 }}>
                   Students
                 </Typography>
-
                 <Typography variant="h4" sx={{ fontWeight: 700 }}>
                   {user?.organization.max_student}
                 </Typography>
@@ -298,7 +273,6 @@ export default function ManagerDashboard({
             </Card>
           </Grid>
         </Grid>
-
         <Box
           sx={{
             width: "100%",
@@ -317,7 +291,6 @@ export default function ManagerDashboard({
               <Typography variant="h6" sx={{ fontWeight: 700, mt: 5 }}>
                 Teachers & Students
               </Typography>
-
               <TableContainer
                 component={Paper}
                 sx={{
@@ -345,34 +318,34 @@ export default function ManagerDashboard({
                       <TableCell sx={{ width: 80 }}>
                         <strong>ID</strong>
                       </TableCell>
-
                       <TableCell sx={{ width: 180 }}>
                         <strong>Name</strong>
                       </TableCell>
-
                       <TableCell sx={{ width: 130 }}>
                         <strong>Role</strong>
                       </TableCell>
-
                       <TableCell sx={{ width: 280 }}>
                         <strong>Email</strong>
                       </TableCell>
-
                       <TableCell sx={{ width: 180 }}>
                         <strong>Invitation</strong>
                       </TableCell>
-
                       <TableCell sx={{ width: 150 }}>
                         <strong>Action</strong>
                       </TableCell>
                     </TableRow>
                   </TableHead>
-
                   <TableBody>
                     {pageLoading ? (
                       <TableRow>
                         <TableCell colSpan={6} align="center">
                           <CircularProgress />
+                        </TableCell>
+                      </TableRow>
+                    ) : userList.length === 0 ? (
+                      <TableRow>
+                        <TableCell colSpan={6} align="center">
+                          No user found
                         </TableCell>
                       </TableRow>
                     ) : (
@@ -382,12 +355,10 @@ export default function ManagerDashboard({
                           <TableCell>{user.id}</TableCell>
                           <TableCell>{user.name}</TableCell>
                           <TableCell>{user.role}</TableCell>
-
                           <TableCell>{user.email}</TableCell>
                           <TableCell>
                             {user.isDefPassUsed ? "Accepted" : "Not Accepted"}
                           </TableCell>
-
                           <TableCell>
                             <Button
                               disabled={loading && editId === user.id}
@@ -408,26 +379,23 @@ export default function ManagerDashboard({
               </TableContainer>
             </CardContent>
           </Card>
-
           {children}
         </Box>
-
         {inviteTeacher && (
-  <div className="fixed inset-0 bg-white/30 backdrop-blur-sm flex justify-center items-center z-50">
-    <IoCloseSharp
-      onClick={() => setInviteTeacher(false)}
-      className="absolute top-8 right-8 text-4xl cursor-pointer"
-    />
-
-<TeacherInviteForm
-  onSuccess={() => {
-    setInviteTeacher(false);
-    getUserData(); 
-  }}
-  onClose={() => setInviteTeacher(false)}
-/>
-  </div>
-)}
+          <div className="fixed inset-0 bg-white/30 backdrop-blur-sm flex justify-center items-center z-50">
+            <IoCloseSharp
+              onClick={() => setInviteTeacher(false)}
+              className="absolute top-8 right-8 text-4xl cursor-pointer"
+            />
+            <TeacherInviteForm
+              onSuccess={() => {
+                setInviteTeacher(false);
+                getUserData();
+              }}
+              onClose={() => setInviteTeacher(false)}
+            />
+          </div>
+        )}
         {reInvite && (
           <div className="fixed inset-0 mt-15 bg-white/30 backdrop-blur-sm flex justify-center items-center z-50">
             <IoCloseSharp

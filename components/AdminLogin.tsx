@@ -1,6 +1,6 @@
 "use client";
 import React, { useActionState, useContext, useEffect, useState } from "react";
-import { MdAdminPanelSettings } from "react-icons/md";;
+import { MdAdminPanelSettings } from "react-icons/md";
 import student from "../public/student.png";
 import Image from "next/image";
 import { BiSolidHide } from "react-icons/bi";
@@ -10,51 +10,44 @@ import { useRouter } from "next/navigation";
 import { AuthContext } from "@/context/AuthContext";
 
 export default function AdminLogin() {
-  const router=useRouter()
-  const auth=useContext(AuthContext)
-  const {getMe}=auth!
-  async function handleSubmit(_:unknown,formData:FormData){
-    const email=formData.get("email") as string
-    const password=formData.get("password")
-    console.log(email)
-    console.log(password)
-    const data={
+  const router = useRouter();
+  const auth = useContext(AuthContext);
+  const { getMe } = auth!;
+  async function handleSubmit(_: unknown, formData: FormData) {
+    const email = formData.get("email") as string;
+    const password = formData.get("password");
+    console.log(email);
+    console.log(password);
+    const data = {
       email,
-      password
-    }
+      password,
+    };
     try {
-      const res=await axios.post("/api/admin/auth",data,{
-      headers:{
-        'Content-Type':"application/json"
-      },
-      withCredentials:true
-    })
-    await getMe();
-    if(res.data.success){
-    return { success: true, 
-        error: res.data.message,
-        data:res.data.data
+      const res = await axios.post("/api/admin/auth", data, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        withCredentials: true,
+      });
+      await getMe();
+      if (res.data.success) {
+        return { success: true, error: res.data.message, data: res.data.data };
+      }
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        console.log("front", error);
+        return { success: false, error: error?.response?.data.message, email };
       }
     }
-    
-    } catch (error) {
-      if(axios.isAxiosError(error)){
-      console.log("front",error)
-      return { success: false, 
-        error: error?.response?.data.message ,
-      email};
-    }
   }
-  }
-  const [states,action,isPending]=useActionState(handleSubmit,null)
+  const [states, action, isPending] = useActionState(handleSubmit, null);
 
-  useEffect(()=>{
-    if(states?.success){
-      router.push("/admin/dashboard")
-      router.refresh()
+  useEffect(() => {
+    if (states?.success) {
+      router.push("/admin/dashboard");
+      router.refresh();
     }
-  },[states,router])
-
+  }, [states, router]);
   const [role, setRole] = useState("superadmin");
   const [showPassword, setShowPassword] = useState(false);
   return (
@@ -74,8 +67,9 @@ export default function AdminLogin() {
             </div>
           </div>
           <div className="flex justify-around flex-wrap items-center">
-            {states?.error&&
-        <p className="text-red-500 font-bold p-2">{states.error}</p>}
+            {states?.error && (
+              <p className="text-red-500 font-bold p-2">{states.error}</p>
+            )}
           </div>
         </div>
         <div className=" flex flex-col flex-grow-2">
@@ -113,11 +107,9 @@ export default function AdminLogin() {
             >
               {isPending ? "Logging..." : "Log in"}
             </button>
-            <p>Not yet accept invitations ?</p>
           </form>
         </div>
       </div>
-      {/* <h1>hello</h1> */}
     </div>
   );
 }

@@ -10,14 +10,12 @@ import axios from "axios";
 
 export default function NavbarQuiz() {
   const router = useRouter();
-
   const auth = useContext(AuthContext);
   if (!auth) {
     return null;
   }
   const user = auth?.user;
   const { setUser, loading } = auth!;
-
   async function handleLogout() {
     try {
       await axios.post(
@@ -27,9 +25,7 @@ export default function NavbarQuiz() {
           withCredentials: true,
         },
       );
-
       setUser(null);
-
       router.replace("/");
       router.refresh();
     } catch (error) {

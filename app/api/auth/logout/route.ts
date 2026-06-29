@@ -8,6 +8,5 @@ export async function POST() {
 
   response.cookies.delete("accessToken");
   response.cookies.delete("tempToken");
-
   return response;
 }

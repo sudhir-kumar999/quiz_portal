@@ -27,15 +27,12 @@ export default function TeacherInviteForm({ onSuccess ,onClose}: Props) {
       .split(",")
       .map((email) => email.trim())
       .filter((email) => email !== "");
-
     if (emailArray.length === 0) {
       setError("Please enter at least one email.");
       return;
     }
-
     try {
       setLoading(true);
-
       const res = await axios.post(
         "/api/manager/invite-teacher",
         {
@@ -48,7 +45,6 @@ export default function TeacherInviteForm({ onSuccess ,onClose}: Props) {
           withCredentials: true,
         }
       );
-
       if (res.data.success) {
         setSuccess(res.data.message);
         setEmails("");
@@ -84,25 +80,21 @@ export default function TeacherInviteForm({ onSuccess ,onClose}: Props) {
         <h2 className="text-2xl font-bold text-center mb-5">
           Invite Teacher
         </h2>
-
         {error && (
           <div className="mb-4 rounded bg-red-100 border border-red-300 text-red-600 p-3">
             {error}
           </div>
         )}
-
         {success && (
           <div className="mb-4 rounded bg-green-100 border border-green-300 text-green-600 p-3">
             {success}
           </div>
         )}
-
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           <div>
             <label className="block mb-2 font-medium">
               Teacher Emails
             </label>
-
             <textarea
               rows={6}
               value={emails}
@@ -111,7 +103,6 @@ export default function TeacherInviteForm({ onSuccess ,onClose}: Props) {
               className="w-full rounded-lg border border-gray-300 p-3 focus:outline-none focus:ring-2 focus:ring-blue-400"
             />
           </div>
-
           <button
             disabled={loading}
             className="bg-blue-600 hover:bg-blue-700 text-white rounded-lg py-3 disabled:opacity-60"

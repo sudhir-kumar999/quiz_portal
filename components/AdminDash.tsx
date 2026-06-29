@@ -23,16 +23,12 @@ export default function AdminDash() {
   const [create, setCreate] = useState(false);
   const [reInvite, setReInvite] = useState(false);
   console.log(create);
-
   const [organizations, setOrganizations] = useState<Organization[]>([]);
   const [loading, setLoading] = useState(true);
-
   const getOrganizations = async () => {
     try {
       setLoading(true);
-
       const res = await axios.get("/api/admin/organizations");
-
       setOrganizations(res.data.data);
       console.log(res.data.data);
     } catch (err) {
@@ -41,7 +37,6 @@ export default function AdminDash() {
       setLoading(false);
     }
   };
-
   useEffect(() => {
     getOrganizations();
   }, []);
@@ -68,7 +63,6 @@ export default function AdminDash() {
           >
             Create +
           </button>
-
           <button
             onClick={() => setReInvite(true)}
             className="p-3 rounded-2xl bg-blue-500 text-white"
@@ -78,7 +72,6 @@ export default function AdminDash() {
         </div>
       </div>
       <h2 className="px-2 sm:px-10">Organizations List</h2>
-
       <div className="grid md:grid-cols-2  lg:grid-cols-3 xl:grid-cols-4 gap-6 mr-4 xs:m-6  ">
         {organizations.map((ele) => (
           <div
@@ -118,7 +111,6 @@ export default function AdminDash() {
             onClick={() => setCreate(false)}
             className="absolute top-8 right-8 text-4xl cursor-pointer"
           />
-
           <OrgForm
             onSuccess={() => {
               setCreate(false);

@@ -16,13 +16,10 @@ export default function ManagerReinvite({ onSuccess }: Props) {
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-
     setError("");
     setSuccess("");
-
     try {
       setLoading(true);
-
       const res = await axios.post(
         "/api/manager/reinvite",
         { email },
@@ -33,11 +30,9 @@ export default function ManagerReinvite({ onSuccess }: Props) {
           withCredentials: true,
         }
       );
-
       if (res.data.success) {
         setSuccess(res.data.message);
         setEmail("");
-
         if (onSuccess) {
           onSuccess();
         }
@@ -61,25 +56,21 @@ export default function ManagerReinvite({ onSuccess }: Props) {
         <h2 className="text-2xl font-bold text-center mb-5">
           Re-Invite Teachers
         </h2>
-
         {error && (
           <div className="mb-4 rounded-md border border-red-300 bg-red-100 px-4 py-2 text-red-600">
             {error}
           </div>
         )}
-
         {success && (
           <div className="mb-4 rounded-md border border-green-300 bg-green-100 px-4 py-2 text-green-700">
             {success}
           </div>
         )}
-
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           <div>
             <label className="mb-1 block font-medium">
               Manager Email
             </label>
-
             <input
               type="email"
               placeholder="Enter manager email"
@@ -88,7 +79,6 @@ export default function ManagerReinvite({ onSuccess }: Props) {
               className="w-full rounded-lg border border-gray-300 bg-gray-50 px-4 py-3 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-300"
             />
           </div>
-
           <button
             disabled={loading}
             type="submit"
