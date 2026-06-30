@@ -22,7 +22,6 @@ type Organization = {
 export default function AdminDash() {
   const [create, setCreate] = useState(false);
   const [reInvite, setReInvite] = useState(false);
-  console.log(create);
   const [organizations, setOrganizations] = useState<Organization[]>([]);
   const [loading, setLoading] = useState(true);
   const getOrganizations = async () => {
@@ -30,9 +29,7 @@ export default function AdminDash() {
       setLoading(true);
       const res = await axios.get("/api/admin/organizations");
       setOrganizations(res.data.data);
-      console.log(res.data.data);
     } catch (err) {
-      console.log(err);
     } finally {
       setLoading(false);
     }

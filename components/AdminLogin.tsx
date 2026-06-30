@@ -1,5 +1,5 @@
 "use client";
-import React, { useActionState, useContext, useEffect, useState } from "react";
+import  { useActionState, useContext, useEffect, useState } from "react";
 import { MdAdminPanelSettings } from "react-icons/md";
 import student from "../public/student.png";
 import Image from "next/image";
@@ -8,7 +8,7 @@ import { BiShow } from "react-icons/bi";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { AuthContext } from "@/context/AuthContext";
-import {motion} from "framer-motion"
+import {motion} from "framer-motion";
 export default function AdminLogin() {
   const router = useRouter();
   const auth = useContext(AuthContext);
@@ -16,8 +16,6 @@ export default function AdminLogin() {
   async function handleSubmit(_: unknown, formData: FormData) {
     const email = formData.get("email") as string;
     const password = formData.get("password");
-    console.log(email);
-    console.log(password);
     const data = {
       email,
       password,
@@ -35,7 +33,6 @@ export default function AdminLogin() {
       }
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        console.log("front", error);
         return { success: false, error: error?.response?.data.message, email };
       }
     }
@@ -53,13 +50,13 @@ export default function AdminLogin() {
   return (
     <div className="flex justify-center flex-col items-center  min-h-screen  bg-gradient-to-br from-[#EBF2FF] to-[#f3d69b] ">
       <motion.div initial={{y:-500,opacity:0}} animate={{y:0,opacity:1}} transition={{duration:0.5 , delay:0.1,ease:"easeIn"}}>
-      <Image src={student} height={100} width={100} alt="logo" />
-      <h1>Quiz Portal</h1>
+        <Image src={student} height={100} width={100} alt="logo" />
+        <h1>Quiz Portal</h1>
       </motion.div>
       <motion.div initial={{y:500,opacity:0}} animate={{y:0,opacity:1}} transition={{duration:0.5 , delay:0.1,ease:"easeIn"}} className=" max-w-[550px] rounded-xl w-[90vw]   max-h-full shadow-xl/30 flex flex-col p-8">
         <div className=" p-2 flex flex-col flex-wrap ">
           <p className="m-2 text-gray-600">Login as</p>
-          <div className={`flex justify-around  flex-wrap `}>
+          <div className={"flex justify-around  flex-wrap "}>
             <div
               onClick={() => setRole("superadmin")}
               className={`flex flex-col w-full rounded-full justify-center items-center  py-2 px-4 max-w-full ${role === "superadmin" ? "bg-[#F59E0B] text-white font-bold" : "bg-transparent"}`}

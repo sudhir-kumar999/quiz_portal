@@ -3,15 +3,15 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-import CircularProgress from '@mui/material/CircularProgress';
-import Paper from '@mui/material/Paper';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Typography from '@mui/material/Typography';
+import CircularProgress from "@mui/material/CircularProgress";
+import Paper from "@mui/material/Paper";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Typography from "@mui/material/Typography";
 interface Quiz {
   id: string;
   title: string;
@@ -41,18 +41,18 @@ export default function QuizTable() {
       const { data } = await axios.get<ApiResponse>(
         "/api/teacher/allquizzes"
       );
-
-      console.log(data)
       if (data.success) {
         setQuizzes(data.data);
       } else {
         setMessage(data.message);
       }
-    } catch (error: any) {
-      setMessage(
-        error.response?.data?.message ??
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        setMessage(
+          error.response?.data?.message ??
           "Failed to load quizzes"
-      );
+        );
+      }
     } finally {
       setLoading(false);
     }
@@ -79,7 +79,6 @@ export default function QuizTable() {
       >
         All Quiz
       </Typography>
-
       {message && (
         <Typography
           sx={{
@@ -90,7 +89,6 @@ export default function QuizTable() {
           {message}
         </Typography>
       )}
-
       <TableContainer
         sx={{
           overflowX: "auto",

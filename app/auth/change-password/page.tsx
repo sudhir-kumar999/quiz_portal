@@ -1,6 +1,6 @@
-import ChangePassword from '@/components/ChangePassword'
-import NavbarQuiz from '@/components/NavbarQuiz'
-import React from 'react'
+import ChangePassword from "@/components/ChangePassword";
+import NavbarQuiz from "@/components/NavbarQuiz";
+import React from "react";
 
 export default function page() {
   return (
@@ -8,5 +8,5 @@ export default function page() {
       <NavbarQuiz/>
       <ChangePassword/>
     </div>
-  )
+  );
 }

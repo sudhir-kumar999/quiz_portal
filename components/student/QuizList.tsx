@@ -44,9 +44,9 @@ export default function QuizList() {
       }
     } catch (error) {
       if(axios.isAxiosError(error)){
-      setMessage(error.response?.data?.message ?? "Something went wrong");
-    } 
-  }finally {
+        setMessage(error.response?.data?.message ?? "Something went wrong");
+      } 
+    }finally {
       setLoading(false);
     }
   }

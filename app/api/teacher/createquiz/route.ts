@@ -5,7 +5,6 @@ import { cookies } from "next/headers";
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-
     const cookieStore = await cookies();
     const accessToken = cookieStore.get("accessToken")?.value;
     if (!accessToken) {
@@ -45,7 +44,6 @@ export async function POST(req: NextRequest) {
         },
       );
     }
-
     return NextResponse.json(
       {
         success: false,

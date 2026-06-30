@@ -5,7 +5,6 @@ export async function POST(req: Request) {
   try {
     const body = await req.json();
     const { email, password } = body;
-    console.log(body);
     if (!email || !password) {
       return NextResponse.json(
         {
@@ -27,11 +26,9 @@ export async function POST(req: Request) {
         withCredentials: true,
       },
     );
-    // console.log(serverRes.data)
     const response = NextResponse.json(serverRes.data, {
       status: serverRes.status,
     });
-
     const tempToken = serverRes.data.tempToken;
     if (tempToken) {
       response.cookies.set("tempToken", tempToken, {
@@ -40,12 +37,9 @@ export async function POST(req: Request) {
         sameSite: "none",
         path: "/",
       });
-    return response;
-
+      return response;
     }
-
     const token = serverRes.data.accessToken;
-    // console.log("tokrn",token)
     response.cookies.set("accessToken", token, {
       httpOnly: true,
       secure: true,
@@ -55,8 +49,6 @@ export async function POST(req: Request) {
     return response;
   } catch (error) {
     if (axios.isAxiosError(error)) {
-      // console.log(error.response?.status)
-
       return NextResponse.json(
         {
           success: false,

@@ -52,7 +52,6 @@ export default function QuizPage() {
   const submittedRef = useRef(false);
   async function loadQuiz() {
     try {
-      setLoading(true);
       const { data } = await axios.get<QuizResponse>(
         `/api/student/quizzes/${quiz_id}`,
       );

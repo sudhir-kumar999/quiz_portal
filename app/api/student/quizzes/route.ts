@@ -5,10 +5,8 @@ import { NextResponse } from "next/server";
 export async function GET() {
   try {
     const cookieStore = await cookies();
-
     const accessToken =
       cookieStore.get("accessToken")?.value;
-
     if (!accessToken) {
       return NextResponse.json(
         {
@@ -20,7 +18,6 @@ export async function GET() {
         }
       );
     }
-
     const serverResponse = await axios.get(
       `${process.env.BACKEND_URL}/student/get-quiz`,
       {
@@ -29,7 +26,6 @@ export async function GET() {
         },
       }
     );
-
     return NextResponse.json(
       serverResponse.data,
       {
@@ -48,7 +44,6 @@ export async function GET() {
         }
       );
     }
-
     return NextResponse.json(
       {
         success: false,

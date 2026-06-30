@@ -14,14 +14,10 @@ export async function POST(
 ) {
   try {
     const { quiz_id } = await params;
-
     const body = await req.json();
-
     const cookieStore = await cookies();
-
     const accessToken =
       cookieStore.get("accessToken")?.value;
-
     if (!accessToken) {
       return NextResponse.json(
         {
@@ -33,7 +29,6 @@ export async function POST(
         }
       );
     }
-
     const serverResponse = await axios.post(
       `${process.env.BACKEND_URL}/student/submitquiz/${quiz_id}`,
       body,
@@ -61,7 +56,6 @@ export async function POST(
         }
       );
     }
-
     return NextResponse.json(
       {
         success: false,

@@ -7,25 +7,20 @@ export default function TeacherReinvite() {
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
   const [successEmails, setSuccessEmails] = useState<string[]>([]);
   const [failedEmails, setFailedEmails] = useState<string[]>([]);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-
     setError("");
-    setSuccess("");
     setSuccessEmails([]);
     setFailedEmails([]);
     if (!email.trim()) {
       setError("Email is required");
       return;
     }
-
     try {
       setLoading(true);
-
       const res = await axios.post(
         "/api/teacher/reinvite-students",
         {
@@ -38,14 +33,9 @@ export default function TeacherReinvite() {
           withCredentials: true,
         },
       );
-
       if (res.data.success) {
-        setSuccess(res.data.message);
-
         setSuccessEmails(res.data.success_email || []);
-
         setFailedEmails(res.data.failedEmail || []);
-
         setEmail("");
       }
     } catch (error) {

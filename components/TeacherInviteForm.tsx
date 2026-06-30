@@ -4,7 +4,6 @@ import axios from "axios";
 import React, { useState } from "react";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
-import { IoCloseSharp } from "react-icons/io5";
 
 type Props = {
   onSuccess: () => void;
@@ -65,18 +64,18 @@ export default function TeacherInviteForm({ onSuccess ,onClose}: Props) {
 
   return (
     <div className="flex justify-center items-center h-screen mt-15">
-        <div className="bg-white rounded-xl shadow-xl w-[90vw] max-w-lg p-6 relative">
-      {/* <div className="bg-white rounded-xl shadow-xl w-[90vw] max-w-lg p-6"> */}
+      <div className="bg-white rounded-xl shadow-xl w-[90vw] max-w-lg p-6 relative">
+        {/* <div className="bg-white rounded-xl shadow-xl w-[90vw] max-w-lg p-6"> */}
         <IconButton
-  onClick={onClose}
-  sx={{
-    position: "absolute",
-    top: 10,
-    right: 10,
-  }}
->
-  <CloseIcon />
-</IconButton>
+          onClick={onClose}
+          sx={{
+            position: "absolute",
+            top: 10,
+            right: 10,
+          }}
+        >
+          <CloseIcon />
+        </IconButton>
         <h2 className="text-2xl font-bold text-center mb-5">
           Invite Teacher
         </h2>

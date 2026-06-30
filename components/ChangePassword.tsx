@@ -6,7 +6,7 @@ import Image from "next/image";
 import { BiSolidHide, BiShow } from "react-icons/bi";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import {motion} from "framer-motion"
+import {motion} from "framer-motion";
 export default function ChangePassword() {
   const router = useRouter();
   const [role] = useState("manager");
@@ -53,8 +53,6 @@ export default function ChangePassword() {
       }
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        console.log(error.response?.data);
-        console.log(error.response?.data.message);
         setError(error.response?.data?.message ?? "Something went wrong");
       } else {
         setError("Something went wrong");
@@ -74,10 +72,10 @@ export default function ChangePassword() {
 
   return (
     <div className="flex justify-center flex-col items-center min-h-screen bg-gradient-to-br from-[#EBF2FF] to-[#f3d69b]">
-            <motion.div initial={{y:-500,opacity:0}} animate={{y:0,opacity:1}} transition={{duration:0.5 , delay:0.1,ease:"easeIn"}} className="flex justify-center flex-col items-center">
-      <Image src={student} height={100} width={100} alt="logo" />
-      <h1 className="text-3xl font-bold mb-3">Quiz Portal</h1>
-      <h2 className="font-weight:600">Hello {email}</h2>
+      <motion.div initial={{y:-500,opacity:0}} animate={{y:0,opacity:1}} transition={{duration:0.5 , delay:0.1,ease:"easeIn"}} className="flex justify-center flex-col items-center">
+        <Image src={student} height={100} width={100} alt="logo" />
+        <h1 className="text-3xl font-bold mb-3">Quiz Portal</h1>
+        <h2 className="font-weight:600">Hello {email}</h2>
       </motion.div>
       <motion.div initial={{y:500,opacity:0}} animate={{y:0,opacity:1}} transition={{duration:0.5 , delay:0.1,ease:"easeIn"}} className="max-w-[550px] w-[90vw] rounded-xl shadow-xl bg-white p-8">
         {error && (

@@ -1,10 +1,8 @@
 "use client";
-import React, { use, useContext, useEffect, useState } from "react";
+import  {  useContext } from "react";
 import logoQuiz from "../public/logoQuiz.png";
 import Image from "next/image";
 import { AuthContext } from "@/context/AuthContext";
-import Link from "next/link";
-import { IoClose, IoMenu } from "react-icons/io5";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 
@@ -34,7 +32,7 @@ export default function NavbarQuiz() {
   }
   return (
     <div
-      className={`fixed bg-[#1E1B4B] text-white border-b-3 border-[#F59E0B] w-full max-w-full top-0 `}
+      className={"fixed bg-[#1E1B4B] text-white border-b-3 border-[#F59E0B] w-full max-w-full top-0 "}
     >
       <div className="flex justify-between items-center p-3">
         <div className="flex justify-center gap-4 items-center ">

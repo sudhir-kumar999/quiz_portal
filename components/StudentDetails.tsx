@@ -30,14 +30,11 @@ export default function StudentsPage() {
   async function getStudents() {
     try {
       setLoading(true);
-
       const res = await axios.get("/api/teacher/students", {
         withCredentials: true,
       });
-
       setStudents(res.data.data);
     } catch (err) {
-      console.log(err);
     } finally {
       setLoading(false);
     }
@@ -58,9 +55,9 @@ export default function StudentsPage() {
           prev.map((student) =>
             student.id === userId
               ? {
-                  ...student,
-                  isBanned: !student.isBanned,
-                }
+                ...student,
+                isBanned: !student.isBanned,
+              }
               : student,
           ),
         );

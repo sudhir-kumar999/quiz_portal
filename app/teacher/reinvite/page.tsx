@@ -1,11 +1,9 @@
-import TeacherInviteForm from '@/components/TeacherInviteForm'
-import TeacherReinvite from '@/components/TeacherReinvite'
-import React from 'react'
+import TeacherReinvite from "@/components/TeacherReinvite";
 
 export default function page() {
   return (
     <div>
-        <TeacherReinvite/>
+      <TeacherReinvite/>
     </div>
-  )
+  );
 }

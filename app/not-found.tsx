@@ -14,20 +14,20 @@ export default function NotFound() {
       return;
     }
     switch (user.role) {
-      case "superadmin":
-        router.replace("/admin/dashboard");
-        break;
-      case "manager":
-        router.replace("/manager/dashboard");
-        break;
-      case "teacher":
-        router.replace("/teacher/dashboard");
-        break;
-      case "student":
-        router.replace("/student/dashboard");
-        break;
-      default:
-        router.replace("/");
+    case "superadmin":
+      router.replace("/admin/dashboard");
+      break;
+    case "manager":
+      router.replace("/manager/dashboard");
+      break;
+    case "teacher":
+      router.replace("/teacher/dashboard");
+      break;
+    case "student":
+      router.replace("/student/dashboard");
+      break;
+    default:
+      router.replace("/");
     }
   }, [user, router]);
   return (

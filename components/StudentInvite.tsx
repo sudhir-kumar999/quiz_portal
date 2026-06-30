@@ -6,7 +6,6 @@ import React, { useState } from "react";
 export default function StudentInvite() {
   const [emails, setEmails] = useState("");
   const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
   const [loading, setLoading] = useState(false);
   const [successEmails, setSuccessEmails] = useState<string[]>([]);
   const [failedEmails, setFailedEmails] = useState<string[]>([]);
@@ -16,8 +15,6 @@ export default function StudentInvite() {
     setSuccessEmails([]);
     setFailedEmails([]);
     setError("");
-    setSuccess("");
-
     const emailArray = emails
       .split(",")
       .map((email) => email.trim())
@@ -27,7 +24,6 @@ export default function StudentInvite() {
       setError("Please enter at least one email.");
       return;
     }
-    console.log(emailArray);
     try {
       setLoading(true);
 
@@ -45,12 +41,8 @@ export default function StudentInvite() {
       );
 
       if (res.data.success) {
-        setSuccess(res.data.message);
-
         setSuccessEmails(res.data.success_email || []);
-
         setFailedEmails(res.data.failedEmail || []);
-
         setEmails("");
       }
     } catch (error) {

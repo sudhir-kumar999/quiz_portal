@@ -5,12 +5,9 @@ import { NextRequest, NextResponse } from "next/server";
 export async function POST(req: NextRequest) {
   try {
     const { userId } = await req.json();
-
     const cookieStore = await cookies();
-
     const accessToken =
       cookieStore.get("accessToken")?.value;
-
     const serverResponse = await axios.post(
       `${process.env.BACKEND_URL}/teacher/ban-users`,
       {
@@ -22,7 +19,6 @@ export async function POST(req: NextRequest) {
         },
       }
     );
-
     return NextResponse.json(serverResponse.data, {
       status: serverResponse.status,
     });
@@ -38,7 +34,6 @@ export async function POST(req: NextRequest) {
         }
       );
     }
-
     return NextResponse.json(
       {
         success: false,

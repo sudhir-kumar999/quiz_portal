@@ -5,8 +5,6 @@ export default function CSVUpload() {
   const [file, setFile] = useState<File | null>(null);
   const [column, setColumn] = useState("");
   const [response, setResponse] = useState("");
-  const [success, setSuccess] = useState("");
-  const [loading, setLoading] = useState(false);
   const [successEmails, setSuccessEmails] = useState<string[]>([]);
   const [failedEmails, setFailedEmails] = useState<string[]>([]);
 
@@ -17,13 +15,11 @@ export default function CSVUpload() {
       e.preventDefault();
       setSuccessEmails([]);
       setFailedEmails([]);
-      setSuccess("");
       const formData = new FormData();
       if (!file || !column) {
         setResponse("please upload a csv file and column name");
         return;
       }
-      console.log(file);
       if (file) {
         formData.append("file", file);
         setResponse("");
@@ -35,7 +31,6 @@ export default function CSVUpload() {
       const res = await axios.post("/api/teacher/uploadcsv", formData);
       setResponse(res.data.message);
       if (res.data.success) {
-        setSuccess(res.data.message);
         setSuccessEmails(res.data.success_email || []);
         setFailedEmails(res.data.failedEmail || []);
       }
@@ -46,7 +41,6 @@ export default function CSVUpload() {
         setResponse("Something went wrong.");
       }
     } finally {
-      setLoading(false);
     }
   }
   return (

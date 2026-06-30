@@ -6,7 +6,6 @@ export async function POST(req: Request) {
   try {
     const body = await req.json();
     const { email } = body;
-
     if (!email || !Array.isArray(email) || email.length === 0) {
       return NextResponse.json(
         {
@@ -18,10 +17,8 @@ export async function POST(req: Request) {
         }
       );
     }
-
     const cookieStore = await cookies();
     const accessToken = cookieStore.get("accessToken")?.value;
-
     if (!accessToken) {
       return NextResponse.json(
         {
@@ -33,7 +30,6 @@ export async function POST(req: Request) {
         }
       );
     }
-
     const serverRes = await axios.post(
       `${process.env.BACKEND_URL}/manager/invite`,
       body,
@@ -45,7 +41,6 @@ export async function POST(req: Request) {
         withCredentials: true,
       }
     );
-
     return NextResponse.json(serverRes.data, {
       status: serverRes.status,
     });
@@ -62,7 +57,6 @@ export async function POST(req: Request) {
         }
       );
     }
-
     return NextResponse.json(
       {
         success: false,

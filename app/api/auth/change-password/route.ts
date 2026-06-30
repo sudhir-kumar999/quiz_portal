@@ -6,7 +6,6 @@ export async function POST(req: Request) {
   try {
     const body = await req.json();
     const { password } = body;
-    console.log(body);
     if (!password) {
       return NextResponse.json(
         {

@@ -1,10 +1,9 @@
-import ResultPage from '@/components/student/ResultPage'
-import React from 'react'
+import ResultPage from "@/components/student/ResultPage";
 
 export default function page() {
   return (
     <div>
       <ResultPage/>
     </div>
-  )
+  );
 }

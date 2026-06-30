@@ -1,7 +1,7 @@
-'use client'
+"use client";
 
-import axios from "axios"
-import { createContext, useEffect, useState } from "react"
+import axios from "axios";
+import { createContext, useEffect, useState } from "react";
 
 type org={
     id:string,
@@ -28,40 +28,39 @@ type AuthContextType={
 
 }
 
-export const AuthContext=createContext<AuthContextType |null>(null)
+export const AuthContext=createContext<AuthContextType |null>(null);
 
 export function AuthProvider({children}:{children:React.ReactNode}){
-    const [user,setUser]=useState<User|null>(null)
-    const [loading,setLoading]=useState(true)
+  const [user,setUser]=useState<User|null>(null);
+  const [loading,setLoading]=useState(true);
 
-   const getMe = async () => {
-  try {
-    const res = await axios.get("/api/auth/me", {
-      withCredentials: true,
-    });
+  const getMe = async () => {
+    try {
+      const res = await axios.get("/api/auth/me", {
+        withCredentials: true,
+      });
 
-    if (res.data.success) {
-      setUser(res.data.data);
-      return res.data.data;
+      if (res.data.success) {
+        setUser(res.data.data);
+        return res.data.data;
+      }
+
+      setUser(null);
+      return null;
+    } catch {
+      setUser(null);
+      return null;
+    } finally {
+      setLoading(false);
     }
+  };
+  useEffect(()=>{
+    getMe();
+  },[]);
 
-    setUser(null);
-    return null;
-  } catch {
-    setUser(null);
-    return null;
-  } finally {
-    setLoading(false);
-  }
-};
-    useEffect(()=>{
-        getMe()
-    },[])
-
-    return(
-        <AuthContext.Provider value={{user,loading,getMe,setUser}}>
-            {children}
-        </AuthContext.Provider>
-    )
-
+  return(
+    <AuthContext.Provider value={{user,loading,getMe,setUser}}>
+      {children}
+    </AuthContext.Provider>
+  );
 }

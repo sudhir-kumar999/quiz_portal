@@ -10,51 +10,48 @@ export default function OrgForm({ onSuccess }: Props) {
     max_teacher:"",
     max_student:"",
     email:""
-  })
+  });
   const [error, setError] = useState("");
-  const [loading,setLoading]=useState(false)
+  const [loading,setLoading]=useState(false);
 
   async function handleForm(e: React.FormEvent<HTMLFormElement>){
     try {
-      setLoading(true)
-      e.preventDefault()
-        setError("");
-    console.log(formData)
-    const res=await axios.post("/api/admin/create-org",formData,{
+      setLoading(true);
+      e.preventDefault();
+      setError("");
+      const res=await axios.post("/api/admin/create-org",formData,{
         headers: {
           "Content-Type": "application/json",
         },
         withCredentials: true,
-      })
-    if(res.data.success){
-      setError("");
-      onSuccess()
-      setLoading(false)
-    return { success: true, 
-        error: res.data.message,
-        data:res.data.data
+      });
+      if(res.data.success){
+        setError("");
+        onSuccess();
+        setLoading(false);
+        return { success: true, 
+          error: res.data.message,
+          data:res.data.data
+        };
       }
-    }
-    
     } catch (error) {
       if(axios.isAxiosError(error)){
-         setError(error.response?.data?.message || "Something went wrong");
-      console.log("front",error)
-      return { success: false, 
-        error: error?.response?.data.message};
+        setError(error.response?.data?.message || "Something went wrong");
+        return { success: false, 
+          error: error?.response?.data.message};
+      }
     }
-  }
   }
   return (
     <div className="mt-10 flex  justify-center items-center h-screen">
       <div className="m-2 xs:m-4 ">
         <h1 className="flex justify-center">Create Organizations</h1>
         <div className="rounded-xl bg-white p-4 xs:p-8 inset-shadow-sm inset-shadow-indigo-500 h-full w-[90vw] max-w-[600px] ">
-         {error && (
-  <p className="mb-3 rounded-md bg-red-100 border border-red-300 text-red-600 px-3 py-2 text-sm">
-    {error}
-  </p>
-)}
+          {error && (
+            <p className="mb-3 rounded-md bg-red-100 border border-red-300 text-red-600 px-3 py-2 text-sm">
+              {error}
+            </p>
+          )}
           <form action="" onSubmit={(e)=>handleForm(e)} className="flex flex-col gap-2">
             <div className="flex flex-col  gap-4">
               <label htmlFor="title">Title of Organization</label>

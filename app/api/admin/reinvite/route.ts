@@ -6,7 +6,6 @@ export async function POST(req: Request) {
   try {
     const body = await req.json();
     const { email } = body;
-
     if (!email) {
       return NextResponse.json(
         {
@@ -15,13 +14,11 @@ export async function POST(req: Request) {
         },
         {
           status: 400,
-        }
+        },
       );
     }
-
     const cookieStore = await cookies();
     const accessToken = cookieStore.get("accessToken")?.value;
-
     if (!accessToken) {
       return NextResponse.json(
         {
@@ -30,10 +27,9 @@ export async function POST(req: Request) {
         },
         {
           status: 401,
-        }
+        },
       );
     }
-
     const serverRes = await axios.post(
       `${process.env.BACKEND_URL}/admin/resend`,
       { email },
@@ -42,9 +38,8 @@ export async function POST(req: Request) {
           Cookie: `accessToken=${accessToken}`,
         },
         withCredentials: true,
-      }
+      },
     );
-
     return NextResponse.json(serverRes.data, {
       status: serverRes.status,
     });
@@ -53,15 +48,13 @@ export async function POST(req: Request) {
       return NextResponse.json(
         {
           success: false,
-          message:
-            error.response?.data?.message || "Failed to send invitation",
+          message: error.response?.data?.message || "Failed to send invitation",
         },
         {
           status: error.response?.status || 500,
-        }
+        },
       );
     }
-
     return NextResponse.json(
       {
         success: false,
@@ -69,7 +62,7 @@ export async function POST(req: Request) {
       },
       {
         status: 500,
-      }
+      },
     );
   }
 }

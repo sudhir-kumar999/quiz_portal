@@ -5,32 +5,24 @@ import jwt from "jsonwebtoken";
 export async function GET() {
   try {
     const cookieStore = await cookies();
-
     const token = cookieStore.get("tempToken")?.value;
-
     if (!token) {
       return NextResponse.json(
         {
           success: false,
           message: "Unauthorized",
         },
-        { status: 401 }
+        { status: 401 },
       );
     }
-
-    const decoded = jwt.verify(
-      token,
-      process.env.SECRET!
-    ) as {
+    const decoded = jwt.verify(token, process.env.SECRET!) as {
       email: string;
       id: string;
     };
-
     return NextResponse.json({
       success: true,
       email: decoded.email,
     });
-
   } catch {
     return NextResponse.json(
       {
@@ -39,7 +31,7 @@ export async function GET() {
       },
       {
         status: 401,
-      }
+      },
     );
   }
 }

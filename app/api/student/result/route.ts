@@ -2,13 +2,10 @@ import axios from "axios";
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function GET(req: NextRequest) {
+export async function GET() {
   try {
     const cookieStore = await cookies();
-
-    const accessToken =
-      cookieStore.get("accessToken")?.value;
-
+    const accessToken = cookieStore.get("accessToken")?.value;
     if (!accessToken) {
       return NextResponse.json(
         {
@@ -17,25 +14,20 @@ export async function GET(req: NextRequest) {
         },
         {
           status: 401,
-        }
+        },
       );
     }
-
     const serverResponse = await axios.get(
       `${process.env.BACKEND_URL}/student/results`,
       {
         headers: {
           Cookie: `accessToken=${accessToken}`,
         },
-      }
+      },
     );
-
-    return NextResponse.json(
-      serverResponse.data,
-      {
-        status: serverResponse.status,
-      }
-    );
+    return NextResponse.json(serverResponse.data, {
+      status: serverResponse.status,
+    });
   } catch (error) {
     if (axios.isAxiosError(error)) {
       return NextResponse.json(
@@ -45,10 +37,9 @@ export async function GET(req: NextRequest) {
         },
         {
           status: error.response?.status ?? 500,
-        }
+        },
       );
     }
-
     return NextResponse.json(
       {
         success: false,
@@ -56,7 +47,7 @@ export async function GET(req: NextRequest) {
       },
       {
         status: 500,
-      }
+      },
     );
   }
 }

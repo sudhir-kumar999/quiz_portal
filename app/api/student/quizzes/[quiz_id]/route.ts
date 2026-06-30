@@ -14,12 +14,9 @@ export async function GET(
 ) {
   try {
     const { quiz_id } = await params;
-
     const cookieStore = await cookies();
-
     const accessToken =
       cookieStore.get("accessToken")?.value;
-
     if (!accessToken) {
       return NextResponse.json(
         {
@@ -31,7 +28,6 @@ export async function GET(
         }
       );
     }
-
     const serverResponse = await axios.get(
       `${process.env.BACKEND_URL}/student/getquiz/${quiz_id}`,
       {
@@ -40,7 +36,6 @@ export async function GET(
         },
       }
     );
-
     return NextResponse.json(
       serverResponse.data,
       {
@@ -59,7 +54,6 @@ export async function GET(
         }
       );
     }
-
     return NextResponse.json(
       {
         success: false,

@@ -56,7 +56,6 @@ export default function TeacherDashboard({ children }: Props) {
       router.replace("/");
       router.refresh();
     } catch (err) {
-      console.log(err);
     }
   }
 

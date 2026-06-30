@@ -66,12 +66,10 @@ export default function ManagerDashboard({
       const res = await axios.get("/api/manager/getuser");
       setUserList(res.data.data);
     } catch (error) {
-      console.log(error);
     } finally {
       setPageLoading(false);
     }
   }
-  console.log(userList);
   React.useEffect(() => {
     getUserData();
   }, []);

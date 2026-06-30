@@ -8,7 +8,7 @@ export default function TeacherLayout({
   return (
     <StudentDashboard>
       {children}
-      </StudentDashboard>
+    </StudentDashboard>
     
   );
 }

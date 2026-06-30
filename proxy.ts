@@ -13,27 +13,19 @@ export default function middleware(req: NextRequest) {
     const token = req.cookies.get("accessToken")?.value;
     const tempToken = req.cookies.get("tempToken")?.value;
     const path = req.nextUrl.pathname;
-
     if (path === "/auth/change-password" && !tempToken) {
       return NextResponse.redirect(new URL("/auth/login", req.url));
     }
-
-    console.log("Path:", path);
-    console.log("Token:", token);
-
     const publicRoutes = [
       "/",
       "/auth/adminlogin",
       "/auth/login",
       "/auth/change-password",
     ];
-
     const isPublicRoute = publicRoutes.includes(path);
-
     if (!token && !isPublicRoute) {
       return NextResponse.redirect(new URL("/", req.url));
     }
-
     if (
       token &&
       (path === "/" ||
@@ -44,84 +36,72 @@ export default function middleware(req: NextRequest) {
         token,
         process.env.SECRET!
       ) as Payload;
-
       if (decoded.role === "superadmin") {
         return NextResponse.redirect(
           new URL("/admin/dashboard", req.url)
         );
       }
-
       if (decoded.role === "manager") {
         return NextResponse.redirect(
           new URL("/manager/dashboard", req.url)
         );
       }
-
       if (decoded.role === "teacher") {
         return NextResponse.redirect(
           new URL("/teacher/dashboard", req.url)
         );
       }
-
       if (decoded.role === "student") {
-  return NextResponse.redirect(
-    new URL("/student/dashboard", req.url)
-  );
-}
+        return NextResponse.redirect(
+          new URL("/student/dashboard", req.url)
+        );
+      }
     }
-
     if (token) {
       const decoded = jwt.verify(
         token,
         process.env.SECRET!
       ) as Payload;
-
       if (
         path.startsWith("/admin") &&
         decoded.role !== "superadmin"
       ) {
         return NextResponse.redirect(new URL("/", req.url));
       }
-
       if (
         path.startsWith("/manager") &&
         decoded.role !== "manager"
       ) {
         return NextResponse.redirect(new URL("/", req.url));
       }
-
       if (
         path.startsWith("/teacher") &&
         decoded.role !== "teacher"
       ) {
         return NextResponse.redirect(new URL("/", req.url));
       }
-
       if (
-  path.startsWith("/student") &&
+        path.startsWith("/student") &&
   decoded.role !== "student"
-) {
-  return NextResponse.redirect(new URL("/", req.url));
-}
+      ) {
+        return NextResponse.redirect(new URL("/", req.url));
+      }
     }
-
     return NextResponse.next();
   } catch (error) {
-    console.log(error);
-
     return NextResponse.redirect(new URL("/", req.url));
   }
 }
 
 export const config = {
   matcher: [
-  "/",
-  "/admin/:path*",
-  "/manager/:path*",
-  "/teacher/:path*",
-  "/student/:path*",
-  "/auth/adminlogin",
-  "/auth/login",
-  "/auth/change-password",
-],
+    "/",
+    "/admin/:path*",
+    "/manager/:path*",
+    "/teacher/:path*",
+    "/student/:path*",
+    "/auth/adminlogin",
+    "/auth/login",
+    "/auth/change-password",
+  ],
 };
