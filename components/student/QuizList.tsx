@@ -53,7 +53,6 @@ export default function QuizList() {
   useEffect(() => {
     fetchQuiz();
   }, []);
-
   const isQuizStarted = (startDate: string, endDate: string) => {
     const now = new Date();
     return now >= new Date(startDate) && now <= new Date(endDate);
@@ -148,7 +147,7 @@ export default function QuizList() {
                   onClick={() => router.push(`/student/quiz/${quiz.id}`)}
                 >
                   {isQuizStarted(quiz.start_date, quiz.end_date)
-                    ? "Start Quiz"
+                    ? "Start Quiz" 
                     : new Date() < new Date(quiz.start_date)
                       ? "Not Started"
                       : "Quiz Ended"}

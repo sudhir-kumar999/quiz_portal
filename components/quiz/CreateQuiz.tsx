@@ -42,8 +42,8 @@ export default function CreateQuiz() {
     const payload = {
       title,
       description,
-      start_date: startDate,
-      end_date: endDate,
+      start_date: new Date(startDate).toISOString(),
+      end_date: new Date(endDate).toISOString(),
       duration: Number(duration),
       questions,
     };

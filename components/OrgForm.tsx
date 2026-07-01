@@ -37,6 +37,7 @@ export default function OrgForm({ onSuccess }: Props) {
     } catch (error) {
       if(axios.isAxiosError(error)){
         setError(error.response?.data?.message || "Something went wrong");
+        setLoading(false)
         return { success: false, 
           error: error?.response?.data.message};
       }

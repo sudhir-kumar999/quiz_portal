@@ -1,6 +1,6 @@
 "use client";
 
-import {  useState } from "react";
+import { useState } from "react";
 import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
@@ -17,6 +17,7 @@ import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import RadioGroup from "@mui/material/RadioGroup";
 import Radio from "@mui/material/Radio";
+import { toast, ToastContainer } from "react-toastify";
 
 import { Question } from "./types";
 
@@ -25,12 +26,11 @@ interface Props {
   onClose: () => void;
   onSave: (question: Question) => void;
 }
-
 const defaultQuestion: Question = {
   type: "multiple_choice",
   question: "",
   marks: 1,
-  options: ["", "", "", ""],
+  options: ["", ""],
   correctOptions: [],
 };
 export default function QuestionDialog({ open, onClose, onSave }: Props) {
@@ -42,7 +42,7 @@ export default function QuestionDialog({ open, onClose, onSave }: Props) {
         type: value,
         question: "",
         marks: 1,
-        options: ["", "", "", ""],
+        options: ["", ""],
         correctOptions: [],
       });
     } else {
@@ -53,6 +53,12 @@ export default function QuestionDialog({ open, onClose, onSave }: Props) {
         correctOptions: true,
       });
     }
+  };
+  const addOption = () => {
+    setQuestion({
+      ...question,
+      options: [...(question.options || []), ""],
+    });
   };
 
   const updateOption = (index: number, value: string) => {
@@ -122,12 +128,13 @@ export default function QuestionDialog({ open, onClose, onSave }: Props) {
           {question.type === "multiple_choice" && (
             <>
               <Typography variant="h6">Options</Typography>
+
               {question.options?.map((option, index) => (
                 <Stack
                   key={index}
                   direction="row"
                   spacing={2}
-                  sx={{ alignItems: "center" }}
+                  sx={{alignItems:"center"}}
                 >
                   <Checkbox
                     checked={(question.correctOptions as number[]).includes(
@@ -135,6 +142,7 @@ export default function QuestionDialog({ open, onClose, onSave }: Props) {
                     )}
                     onChange={() => toggleCorrectOption(index)}
                   />
+
                   <TextField
                     fullWidth
                     label={`Option ${index + 1}`}
@@ -143,6 +151,9 @@ export default function QuestionDialog({ open, onClose, onSave }: Props) {
                   />
                 </Stack>
               ))}
+              <Button variant="outlined" onClick={addOption}>
+                + Add Option
+              </Button>
             </>
           )}
           {question.type === "true_false" && (
@@ -186,29 +197,29 @@ export default function QuestionDialog({ open, onClose, onSave }: Props) {
           variant="contained"
           onClick={() => {
             if (!question.question.trim()) {
-              alert("Question is required");
+              toast.error("Question is required");
               return;
             }
             if (question.marks < 1) {
-              alert("Marks must be at least 1");
+              toast.error("Marks must be at least 1");
               return;
             }
             if (question.type === "multiple_choice") {
               const options = question.options || [];
               if (options.length < 2) {
-                alert("Minimum 2 options required");
+                toast.error("Minimum 2 options required");
                 return;
               }
               const hasEmpty = options.some((item) => item.trim() === "");
               if (hasEmpty) {
-                alert("All options are required");
+                toast.error("All options are required");
                 return;
               }
               if (
                 !Array.isArray(question.correctOptions) ||
                 question.correctOptions.length === 0
               ) {
-                alert("Select at least one correct answer");
+                toast.error("Select at least one correct answer");
                 return;
               }
             }

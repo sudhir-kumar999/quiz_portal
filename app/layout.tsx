@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { AuthProvider } from "@/context/AuthContext";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
+import { ToastContainer } from "react-toastify";
 
 export const metadata: Metadata = {
   title: "Smart Quiz Portal",
@@ -18,6 +19,7 @@ export default async function RootLayout({
         <body>
           <AppRouterCacheProvider>
             <AuthProvider>
+              <ToastContainer />
               {children}
             </AuthProvider>
           </AppRouterCacheProvider>

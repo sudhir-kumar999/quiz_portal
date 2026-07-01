@@ -14,6 +14,7 @@ import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
+import { toast } from "react-toastify";
 type QuestionType = "multiple_choice" | "true_false";
 
 interface Question {
@@ -63,7 +64,7 @@ export default function QuizPage() {
       }
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        alert(error.response?.data?.message ?? "Failed to load quiz");
+        toast.error(error.response?.data?.message ?? "Failed to load quiz");
       }
       router.replace("/student/dashboard");
     } finally {
@@ -82,12 +83,12 @@ export default function QuizPage() {
       const { data } = await axios.post(`/api/student/submitquiz/${quiz_id}`, {
         answers,
       });
-      alert(data.message);
+      toast.success(data.message);
       router.replace("/student/dashboard");
     } catch (error) {
       if (axios.isAxiosError(error)) {
         submittedRef.current = false;
-        alert(error.response?.data?.message ?? "Failed to submit quiz");
+        toast.error(error.response?.data?.message ?? "Failed to submit quiz");
       }
     }
   }

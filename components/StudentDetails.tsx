@@ -14,6 +14,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Button from "@mui/material/Button";
+import { toast } from "react-toastify";
 type Student = {
   id: string;
   name: string;
@@ -62,11 +63,11 @@ export default function StudentsPage() {
           ),
         );
       } else {
-        alert(data.message);
+        toast.success(data.message);
       }
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        alert(error.response?.data?.message ?? "Something went wrong");
+        toast.error(error.response?.data?.message ?? "Something went wrong");
       }
     } finally {
       setEditId(null);

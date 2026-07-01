@@ -313,9 +313,9 @@ export default function ManagerDashboard({
                 >
                   <TableHead>
                     <TableRow>
-                      <TableCell sx={{ width: 80 }}>
+                      {/* <TableCell sx={{ width: 80 }}>
                         <strong>ID</strong>
-                      </TableCell>
+                      </TableCell> */}
                       <TableCell sx={{ width: 180 }}>
                         <strong>Name</strong>
                       </TableCell>
@@ -350,7 +350,7 @@ export default function ManagerDashboard({
                       userList &&
                       userList.map((user) => (
                         <TableRow hover key={user.id}>
-                          <TableCell>{user.id}</TableCell>
+                          {/* <TableCell>{user.id}</TableCell> */}
                           <TableCell>{user.name}</TableCell>
                           <TableCell>{user.role}</TableCell>
                           <TableCell>{user.email}</TableCell>

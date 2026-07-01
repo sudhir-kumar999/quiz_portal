@@ -56,13 +56,13 @@ export default function AdminDash() {
         <div className="flex gap-3">
           <button
             onClick={() => setCreate(true)}
-            className="p-3 rounded-2xl bg-amber-400"
+            className="p-3 rounded-2xl cursor-pointer bg-amber-400"
           >
             Create +
           </button>
           <button
             onClick={() => setReInvite(true)}
-            className="p-3 rounded-2xl bg-blue-500 text-white"
+            className="p-3 rounded-2xl cursor-pointer bg-blue-500 text-white"
           >
             Re-Invite
           </button>

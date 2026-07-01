@@ -102,7 +102,7 @@ export default function AdminLogin() {
             <button
               type="submit"
               disabled={isPending}
-              className={`mt-4 mb-2 text-white  font-medium rounded-base text-sm px-4 py-2.5 text-center leading-5 ${role == "superadmin" ? "bg-[#F59E0B] text-white font-bold" : role == "manager" ? "bg-[#3B82F6] text-white font-bold" : role == "teacher" ? "bg-[#8B5CF6] text-white font-bold" : role == "student" ? "bg-[#10B981] text-white font-bold" : "bg-slate-400"}`}
+              className={`mt-4 mb-2 cursor-pointer text-white  font-medium rounded-base text-sm px-4 py-2.5 text-center leading-5 ${role == "superadmin" ? "bg-[#F59E0B] text-white font-bold" : role == "manager" ? "bg-[#3B82F6] text-white font-bold" : role == "teacher" ? "bg-[#8B5CF6] text-white font-bold" : role == "student" ? "bg-[#10B981] text-white font-bold" : "bg-slate-400"}`}
             >
               {isPending ? "Logging..." : "Log in"}
             </button>

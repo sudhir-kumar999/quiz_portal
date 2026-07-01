@@ -43,7 +43,7 @@ export default function NavbarQuiz() {
           {!loading && user && (
             <button
               onClick={handleLogout}
-              className="bg-red-500 px-4 py-2 rounded-lg"
+              className="bg-red-500 cursor-pointer px-4 py-2 rounded-lg"
             >
               Logout
             </button>
